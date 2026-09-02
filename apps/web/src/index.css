@@ -1,0 +1,98 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   Design Tokens
+   ===================================================== */
+:root {
+  --color-bg:       #0a0a0f;
+  --color-surface:  rgba(255, 255, 255, 0.04);
+  --color-primary:  #7c3aed;
+  --color-accent:   #3b82f6;
+  --color-text:     #e5e7eb;
+  --color-muted:    #9ca3af;
+}
+
+/* =====================================================
+   Base
+   ===================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  color-scheme: dark;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--color-bg);
+}
+
+/* =====================================================
+   Accessibility — Focus Rings
+   ===================================================== */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* =====================================================
+   Glassmorphism Utility
+   ===================================================== */
+.glass {
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =====================================================
+   Scrollbar — Subtle dark styling
+   ===================================================== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2d2d44; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #3d3d5c; }
+
+/* =====================================================
+   Tailwind Custom Colour Aliases
+   ===================================================== */
+.text-primary { color: var(--color-primary); }
+.bg-primary   { background-color: var(--color-primary); }
+.text-accent  { color: var(--color-accent); }
+.bg-accent    { background-color: var(--color-accent); }
+
+/* =====================================================
+   Utility — subtle animated gradient underline
+   ===================================================== */
+.gradient-underline {
+  position: relative;
+}
+.gradient-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 99px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.gradient-underline:hover::after { transform: scaleX(1); }
+
+/* =====================================================
+   Skeleton pulse — ensure Tailwind's animate-pulse works
+   ===================================================== */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
