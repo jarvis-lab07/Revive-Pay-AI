@@ -1,5 +1,6 @@
 // In a real application, this would use fetch or axios configured with the auth token and backend URL
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+console.log('Using API Base for Razorpay:', API_BASE);
 
 export const RazorpayService = {
   createRetryOrder: async (recoveryCaseId: string) => {

@@ -63,7 +63,7 @@ export const Dashboard: React.FC = () => {
   const stats = [
     { label: 'Revenue at Risk', value: `₹${(mockDashboardStats.revenueAtRisk / 100000).toFixed(1)}L`, icon: AlertCircle, color: 'text-rose-500', bg: 'bg-rose-500/10', trend: '+8.2%', trendColor: 'text-rose-400' },
     { label: 'Revenue Recovered', value: `₹${(mockDashboardStats.revenueRecovered / 100000).toFixed(1)}L`, icon: DollarSign, color: 'text-emerald-500', bg: 'bg-emerald-500/10', trend: '+23.5%', trendColor: 'text-emerald-400' },
-    { label: 'Recovery Rate', value: `${mockDashboardStats.recoveryRate}%`, icon: ShieldCheck, color: 'text-blue-500', bg: 'bg-blue-500/10', trend: '+4.1%', trendColor: 'text-emerald-400' },
+    { label: 'Recovery Rate', value: `${mockDashboardStats.recoverySuccessRate}%`, icon: ShieldCheck, color: 'text-blue-500', bg: 'bg-blue-500/10', trend: '+4.1%', trendColor: 'text-emerald-400' },
     { label: 'Avg. Recovery Time', value: mockDashboardStats.avgRecoveryTime, icon: Clock, color: 'text-primary', bg: 'bg-primary/10', trend: '-12min', trendColor: 'text-emerald-400' },
   ];
 

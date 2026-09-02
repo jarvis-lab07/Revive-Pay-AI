@@ -1,4 +1,5 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+console.log('Using API Base:', API_BASE);
 
 export const AIService = {
   analyzeCase: async (recoveryCaseId: string) => {
@@ -32,7 +33,7 @@ export const AIService = {
   },
 
   approveAction: async (recoveryCaseId: string, approved: boolean, actionDetails?: any) => {
-    console.log(`[Mock API] Approving action for case: ${recoveryCaseId}, Approved: ${approved}`);
+    console.log(`[Mock API] Approving action for case: ${recoveryCaseId}, Approved: ${approved}`, actionDetails);
     return { success: true, message: 'Action status updated' };
 
     /* Real implementation:

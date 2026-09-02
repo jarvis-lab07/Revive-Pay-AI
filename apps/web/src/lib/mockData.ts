@@ -5,6 +5,7 @@ export const mockDashboardStats: DashboardStats = {
   revenueRecovered: 22350,
   recoverySuccessRate: 63,
   pendingCases: 14,
+  avgRecoveryTime: '2.5h',
 };
 
 export const mockCustomers = [
@@ -182,3 +183,6 @@ export const mockChartDataPie = [
   { name: 'Failed', value: 15, fill: '#ef4444' },
   { name: 'Pending', value: 22, fill: 'var(--color-accent)' },
 ];
+
+export const mockRecoveryTrendData = mockChartDataLine.map(d => ({ date: d.name, atRisk: d.risk, recovered: d.recovered }));
+export const mockFailureReasonData = mockChartDataBar.map(d => ({ reason: d.name, count: d.count }));

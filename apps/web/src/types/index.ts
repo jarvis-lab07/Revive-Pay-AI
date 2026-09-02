@@ -40,4 +40,5 @@ export interface DashboardStats {
   revenueRecovered: number;
   recoverySuccessRate: number;
   pendingCases: number;
+  avgRecoveryTime: string;
 }

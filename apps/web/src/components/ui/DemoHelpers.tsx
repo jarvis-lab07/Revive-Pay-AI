@@ -12,6 +12,7 @@ export const DemoHelpers: React.FC = () => {
   const queryClient = useQueryClient();
 
   const handleAction = async (action: string, endpoint: string) => {
+    console.log(`Executing ${action} against ${endpoint}`);
     setIsLoading(true);
     try {
       // Mocking API call for demo helpers
