@@ -1,4 +1,4 @@
-import { Router, express } from 'express';
+import express, { Router } from 'express';
 import { RazorpayController } from '../controllers/razorpay';
 import { authenticate } from '../middleware/auth';
 import rateLimit from 'express-rate-limit';
