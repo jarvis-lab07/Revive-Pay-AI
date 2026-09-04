@@ -15,14 +15,14 @@ export class RecoveryAgentService {
     // 1. Fetch full context
     const { data: recoveryCase, error: caseError } = await supabaseAdmin
       .from('recovery_cases')
-      .select(\`
-        *,
-        payment_events!inner(
-          *,
-          customers (*),
-          merchants (business_name, merchant_settings (*))
-        )
-      \`)
+      .select(`
+  *,
+  payment_events!inner(
+    *,
+    customers (*),
+    merchants (business_name, merchant_settings (*))
+  )
+`)
       .eq('id', recoveryCaseId)
       .eq('payment_events.merchant_id', merchantId)
       .single();
