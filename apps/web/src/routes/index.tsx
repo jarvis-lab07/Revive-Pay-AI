@@ -1,30 +1,23 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { MainLayout } from '../components/layout/MainLayout';
-import { EmptyState } from '../components/ui/EmptyState';
 import { ErrorBoundary } from '../components/ui/ErrorBoundary';
-import { Settings, Users } from 'lucide-react';
 
-const Dashboard = React.lazy(() => import('../pages/Dashboard').then(m => ({ default: m.Dashboard })));
-const RecoveryCenter = React.lazy(() => import('../pages/RecoveryCenter').then(m => ({ default: m.RecoveryCenter })));
-const AuditTrail = React.lazy(() => import('../pages/AuditTrail').then(m => ({ default: m.AuditTrail })));
+const Dashboard = React.lazy(() => import('../pages/Dashboard').then((m) => ({ default: m.Dashboard })));
+const RecoveryCenter = React.lazy(() =>
+  import('../pages/RecoveryCenter').then((m) => ({ default: m.RecoveryCenter }))
+);
+const AuditTrail = React.lazy(() => import('../pages/AuditTrail').then((m) => ({ default: m.AuditTrail })));
+const Customers = React.lazy(() => import('../pages/Customers').then((m) => ({ default: m.Customers })));
+const Settings = React.lazy(() => import('../pages/Settings').then((m) => ({ default: m.Settings })));
 
 const PageLoader = () => (
   <div className="flex items-center justify-center h-full min-h-[50vh]">
-    <div className="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+    <div className="w-8 h-8 border-[3px] border-primary/20 border-t-primary rounded-full animate-spin" />
   </div>
 );
 
-// Placeholder for unbuilt pages
-const PlaceholderPage = ({ title, icon: Icon }: { title: string, icon: any }) => (
-  <div className="h-full flex items-center justify-center">
-    <EmptyState
-      icon={<Icon size={48} className="text-gray-600" />}
-      title={title}
-      description="This feature is coming soon in the next update."
-    />
-  </div>
-);
+const withSuspense = (node: React.ReactNode) => <Suspense fallback={<PageLoader />}>{node}</Suspense>;
 
 export const router = createBrowserRouter([
   {
@@ -35,42 +28,12 @@ export const router = createBrowserRouter([
       </ErrorBoundary>
     ),
     children: [
-      {
-        index: true,
-        element: <Navigate to="/dashboard" replace />,
-      },
-      {
-        path: 'dashboard',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <Dashboard />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'recovery',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <RecoveryCenter />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'audit',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <AuditTrail />
-          </Suspense>
-        ),
-      },
-      {
-        path: 'customers',
-        element: <PlaceholderPage title="Customers Management" icon={Users} />,
-      },
-      {
-        path: 'settings',
-        element: <PlaceholderPage title="Settings" icon={Settings} />,
-      },
+      { index: true, element: <Navigate to="/dashboard" replace /> },
+      { path: 'dashboard', element: withSuspense(<Dashboard />) },
+      { path: 'recovery', element: withSuspense(<RecoveryCenter />) },
+      { path: 'audit', element: withSuspense(<AuditTrail />) },
+      { path: 'customers', element: withSuspense(<Customers />) },
+      { path: 'settings', element: withSuspense(<Settings />) },
     ],
   },
 ]);

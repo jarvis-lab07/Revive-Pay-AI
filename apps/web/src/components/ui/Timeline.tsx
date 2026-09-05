@@ -16,26 +16,30 @@ interface TimelineProps {
 
 export const Timeline: React.FC<TimelineProps> = ({ events }) => {
   return (
-    <div className="relative border-l border-gray-800 ml-4 py-2 space-y-8">
+    <div className="relative border-l border-border ml-3 py-1 space-y-7">
       {events.map((event, index) => (
-        <motion.div 
+        <motion.div
           key={event.id}
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
+          transition={{ delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
           className="relative pl-8"
         >
-          <div className={`absolute -left-2.5 top-0 p-0.5 rounded-full bg-[#0f0f1a] ${event.isCompleted ? 'text-emerald-500' : 'text-gray-500'}`}>
+          <div
+            className={`absolute -left-[13px] top-0 p-1 rounded-full bg-white border border-border ${
+              event.isCompleted ? 'text-emerald-600' : 'text-ink-muted'
+            }`}
+          >
             {event.icon}
           </div>
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
             <div>
-              <h4 className={`text-base font-medium ${event.isCompleted ? 'text-white' : 'text-gray-400'}`}>
+              <h4 className={`text-sm font-semibold ${event.isCompleted ? 'text-ink' : 'text-ink-secondary'}`}>
                 {event.title}
               </h4>
-              <p className="text-sm text-gray-500 mt-1">{event.description}</p>
+              <p className="text-sm text-ink-muted mt-1 leading-relaxed">{event.description}</p>
             </div>
-            <div className="text-xs text-gray-500 whitespace-nowrap">
+            <div className="text-xs text-ink-muted whitespace-nowrap font-medium">
               {new Date(event.timestamp).toLocaleString()}
             </div>
           </div>

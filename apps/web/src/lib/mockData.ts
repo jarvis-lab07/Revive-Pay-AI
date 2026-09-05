@@ -8,15 +8,28 @@ export const mockDashboardStats: DashboardStats = {
   avgRecoveryTime: '2.5h',
 };
 
-export const mockCustomers = [
-  { id: 'c1', name: 'Rahul Sharma', email: 'rahul.s@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c1' },
-  { id: 'c2', name: 'Priya Patel', email: 'priya.p@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c2' },
-  { id: 'c3', name: 'Amit Singh', email: 'amit.s@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c3' },
-  { id: 'c4', name: 'Neha Gupta', email: 'neha.g@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c4' },
-  { id: 'c5', name: 'Vikram Reddy', email: 'vikram.r@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c5' },
-  { id: 'c6', name: 'Anjali Desai', email: 'anjali.d@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c6' },
-  { id: 'c7', name: 'Rohan Kumar', email: 'rohan.k@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c7' },
-  { id: 'c8', name: 'Sneha Joshi', email: 'sneha.j@example.com', avatarUrl: 'https://i.pravatar.cc/150?u=c8' },
+export type CustomerRecord = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  avatarUrl: string;
+  lifetimeValue: number;
+  openCases: number;
+  lastPaymentAt: string;
+  risk: 'low' | 'medium' | 'high';
+  status: 'active' | 'at_risk' | 'recovered';
+};
+
+export const mockCustomers: CustomerRecord[] = [
+  { id: 'c1', name: 'Rahul Sharma', email: 'rahul.s@example.com', phone: '+91 98765 43210', avatarUrl: 'https://i.pravatar.cc/150?u=c1', lifetimeValue: 84200, openCases: 1, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), risk: 'medium', status: 'at_risk' },
+  { id: 'c2', name: 'Priya Patel', email: 'priya.p@example.com', phone: '+91 98201 11223', avatarUrl: 'https://i.pravatar.cc/150?u=c2', lifetimeValue: 156400, openCases: 1, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), risk: 'high', status: 'at_risk' },
+  { id: 'c3', name: 'Amit Singh', email: 'amit.s@example.com', phone: '+91 99887 66554', avatarUrl: 'https://i.pravatar.cc/150?u=c3', lifetimeValue: 42100, openCases: 0, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(), risk: 'low', status: 'recovered' },
+  { id: 'c4', name: 'Neha Gupta', email: 'neha.g@example.com', phone: '+91 97654 22110', avatarUrl: 'https://i.pravatar.cc/150?u=c4', lifetimeValue: 67800, openCases: 1, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), risk: 'medium', status: 'at_risk' },
+  { id: 'c5', name: 'Vikram Reddy', email: 'vikram.r@example.com', phone: '+91 90011 22334', avatarUrl: 'https://i.pravatar.cc/150?u=c5', lifetimeValue: 91200, openCases: 1, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(), risk: 'medium', status: 'at_risk' },
+  { id: 'c6', name: 'Anjali Desai', email: 'anjali.d@example.com', phone: '+91 98123 44556', avatarUrl: 'https://i.pravatar.cc/150?u=c6', lifetimeValue: 210500, openCases: 0, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(), risk: 'high', status: 'active' },
+  { id: 'c7', name: 'Rohan Kumar', email: 'rohan.k@example.com', phone: '+91 98989 12121', avatarUrl: 'https://i.pravatar.cc/150?u=c7', lifetimeValue: 18500, openCases: 1, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(), risk: 'low', status: 'at_risk' },
+  { id: 'c8', name: 'Sneha Joshi', email: 'sneha.j@example.com', phone: '+91 97000 33445', avatarUrl: 'https://i.pravatar.cc/150?u=c8', lifetimeValue: 55400, openCases: 1, lastPaymentAt: new Date(Date.now() - 1000 * 60 * 60 * 18).toISOString(), risk: 'low', status: 'active' },
 ];
 
 export const mockRecoveryCases: RecoveryCase[] = [

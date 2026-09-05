@@ -17,9 +17,9 @@ export function DataTable<T>({ data, columns, keyExtractor }: DataTableProps<T>)
     <div className="overflow-x-auto">
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="border-b border-gray-800 text-gray-400 text-sm">
+          <tr className="border-b border-border text-ink-muted text-[11px] uppercase tracking-[0.08em]">
             {columns.map((col) => (
-              <th key={col.key} className="pb-3 px-4 font-medium whitespace-nowrap">
+              <th key={col.key} className="pb-3 px-4 font-semibold whitespace-nowrap">
                 {col.header}
               </th>
             ))}
@@ -27,9 +27,12 @@ export function DataTable<T>({ data, columns, keyExtractor }: DataTableProps<T>)
         </thead>
         <tbody className="text-sm">
           {data.map((item) => (
-            <tr key={keyExtractor(item)} className="border-b border-gray-800/50 hover:bg-white/5 transition-colors">
+            <tr
+              key={keyExtractor(item)}
+              className="border-b border-border/60 hover:bg-slate-50/90 transition-colors"
+            >
               {columns.map((col) => (
-                <td key={col.key} className="py-4 px-4 whitespace-nowrap">
+                <td key={col.key} className="py-3.5 px-4 whitespace-nowrap align-middle">
                   {col.render ? col.render(item) : (item as any)[col.key]}
                 </td>
               ))}

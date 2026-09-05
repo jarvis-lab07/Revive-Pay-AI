@@ -11,18 +11,13 @@ export const DemoHelpers: React.FC = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const handleAction = async (action: string, endpoint: string) => {
-    console.log(`Executing ${action} against ${endpoint}`);
+  const handleAction = async (action: string) => {
     setIsLoading(true);
     try {
-      // Mocking API call for demo helpers
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
+      await new Promise((resolve) => setTimeout(resolve, 700));
       toast(`${action} executed successfully`, 'success');
-      
-      // Invalidate relevant queries
       queryClient.invalidateQueries();
-    } catch (error) {
+    } catch {
       toast(`Failed to execute ${action}`, 'error');
     } finally {
       setIsLoading(false);
@@ -32,56 +27,56 @@ export const DemoHelpers: React.FC = () => {
   return (
     <div className="fixed bottom-4 left-4 z-[90]">
       <div className="relative">
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-12 h-12 bg-gray-800 text-gray-300 hover:text-white rounded-full flex items-center justify-center shadow-lg border border-gray-700 hover:border-gray-500 transition-colors z-10 relative"
+          className="w-11 h-11 bg-accent text-white hover:opacity-90 rounded-xl flex items-center justify-center shadow-panel border border-accent/20 transition-all"
           aria-label="Demo Helpers Menu"
         >
-          <Settings2 size={20} />
+          <Settings2 size={18} />
         </button>
 
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              initial={{ opacity: 0, y: 8, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.9 }}
-              className="absolute bottom-16 left-0 w-64 bg-[#161622] border border-gray-700 rounded-xl shadow-2xl p-4 flex flex-col gap-3"
+              exit={{ opacity: 0, y: 8, scale: 0.96 }}
+              className="absolute bottom-14 left-0 w-64 bg-white border border-border rounded-2xl shadow-lift p-3.5 flex flex-col gap-2"
             >
-              <div className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1 flex items-center gap-1.5">
-                <AlertCircle size={14} /> Demo Helpers
+              <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-muted mb-1 flex items-center gap-1.5 px-1">
+                <AlertCircle size={12} /> Demo Helpers
               </div>
-              
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full justify-start text-xs border-gray-700 hover:bg-white/5"
-                onClick={() => handleAction('Seed Demo Case', '/test/seed')}
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full justify-start text-xs"
+                onClick={() => handleAction('Seed Demo Case')}
                 disabled={isLoading}
               >
-                <Database size={14} className="mr-2 text-blue-400" />
+                <Database size={14} className="text-sky-600" />
                 Seed Demo Case
               </Button>
-              
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full justify-start text-xs border-gray-700 hover:bg-white/5"
-                onClick={() => handleAction('Trigger Webhook', '/test/webhook')}
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full justify-start text-xs"
+                onClick={() => handleAction('Trigger Webhook')}
                 disabled={isLoading}
               >
-                <Zap size={14} className="mr-2 text-amber-400" />
+                <Zap size={14} className="text-amber-600" />
                 Fake Webhook Trigger
               </Button>
-              
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full justify-start text-xs border-gray-700 hover:bg-rose-500/20 hover:text-rose-400"
-                onClick={() => handleAction('Reset Data', '/test/reset')}
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full justify-start text-xs hover:border-rose-200 hover:text-rose-700"
+                onClick={() => handleAction('Reset Data')}
                 disabled={isLoading}
               >
-                <RefreshCw size={14} className="mr-2 text-rose-500" />
+                <RefreshCw size={14} className="text-rose-600" />
                 Reset Demo Data
               </Button>
             </motion.div>

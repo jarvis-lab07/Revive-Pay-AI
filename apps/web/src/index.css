@@ -4,15 +4,33 @@
 @tailwind utilities;
 
 /* =====================================================
-   Design Tokens
+   Design Tokens — Professional finance ops
    ===================================================== */
 :root {
-  --color-bg:       #0a0a0f;
-  --color-surface:  rgba(255, 255, 255, 0.04);
-  --color-primary:  #7c3aed;
-  --color-accent:   #3b82f6;
-  --color-text:     #e5e7eb;
-  --color-muted:    #9ca3af;
+  --color-bg: #f3f5f7;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eef1f4;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-primary: #0f766e;
+  --color-primary-hover: #0d9488;
+  --color-primary-soft: rgba(15, 118, 110, 0.08);
+  --color-accent: #1e3a5f;
+  --color-accent-soft: rgba(30, 58, 95, 0.08);
+  --color-text: #0f172a;
+  --color-text-secondary: #334155;
+  --color-muted: #64748b;
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-danger: #e11d48;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.1);
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, sans-serif;
 }
 
 /* =====================================================
@@ -21,7 +39,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   background-color: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
@@ -29,8 +47,22 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+/* Atmospheric app background */
+.app-shell {
+  background:
+    radial-gradient(1200px 600px at 0% -10%, rgba(15, 118, 110, 0.07), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(30, 58, 95, 0.06), transparent 50%),
+    linear-gradient(180deg, #f7f9fb 0%, var(--color-bg) 40%, #eef2f5 100%);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 /* =====================================================
@@ -43,26 +75,40 @@ body {
 }
 
 /* =====================================================
-   Glassmorphism Utility
+   Surface / Panel utilities
    ===================================================== */
-.glass {
+.surface {
   background: var(--color-surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.surface-muted {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: var(--shadow-sm);
 }
 
 /* =====================================================
-   Scrollbar — Subtle dark styling
+   Scrollbar
    ===================================================== */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #2d2d44; border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: #3d3d5c; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 /* =====================================================
-   Tailwind Custom Colour Aliases
+   Colour aliases
    ===================================================== */
 .text-primary { color: var(--color-primary); }
 .bg-primary   { background-color: var(--color-primary); }
@@ -70,29 +116,68 @@ body {
 .bg-accent    { background-color: var(--color-accent); }
 
 /* =====================================================
-   Utility — subtle animated gradient underline
+   Inputs
    ===================================================== */
-.gradient-underline {
-  position: relative;
+.input-field {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.gradient-underline::after {
-  content: '';
-  position: absolute;
-  left: 0; bottom: -2px;
-  width: 100%; height: 2px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  border-radius: 99px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+
+.input-field::placeholder {
+  color: #94a3b8;
 }
-.gradient-underline:hover::after { transform: scaleX(1); }
+
+.input-field:hover {
+  border-color: var(--color-border-strong);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
 
 /* =====================================================
-   Skeleton pulse — ensure Tailwind's animate-pulse works
+   Page enter motion helper
+   ===================================================== */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* =====================================================
+   Skeleton pulse
    ===================================================== */
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+  50%       { opacity: 0.45; }
 }
 .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+/* =====================================================
+   Nav active indicator
+   ===================================================== */
+.nav-active {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  box-shadow: inset 3px 0 0 var(--color-primary);
+}

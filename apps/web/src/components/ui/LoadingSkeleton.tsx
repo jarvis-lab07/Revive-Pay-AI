@@ -5,7 +5,5 @@ interface LoadingSkeletonProps {
 }
 
 export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ className = '' }) => {
-  return (
-    <div className={`animate-pulse bg-gray-800 rounded-md ${className}`}></div>
-  );
+  return <div className={`skeleton-shimmer rounded-md ${className}`} />;
 };
